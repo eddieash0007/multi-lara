@@ -13,6 +13,7 @@ import VueRouter from 'vue-router'
 import moment from 'moment';
 import {Form, HasError, AlertError} from 'vform'
 import Vue from 'vue';
+import VueProgressBar from 'vue-progressbar'
 
 
 Vue.use(VueRouter)
@@ -31,6 +32,22 @@ const router = new VueRouter({
     mode: 'history',
     routes // short for `routes: routes`
   })
+
+  const options = {
+    color: '#bffaf3',
+    failedColor: '#874b4b',
+    thickness: '5px',
+    transition: {
+      speed: '0.2s',
+      opacity: '0.6s',
+      termination: 300
+    },
+    autoRevert: true,
+    location: 'top',
+    inverse: false
+  }
+
+Vue.use(VueProgressBar, options)
 
 Vue.filter('fUpper', function(text){
   return text.charAt(0).toUpperCase()+ text.slice(1);
