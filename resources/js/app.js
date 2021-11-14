@@ -14,11 +14,14 @@ import moment from 'moment';
 import {Form, HasError, AlertError} from 'vform'
 import Vue from 'vue';
 import VueProgressBar from 'vue-progressbar'
+import Swal from 'sweetalert2'
 
 
 Vue.use(VueRouter)
 
 window.Form = Form;
+window.Swal = Swal;
+
 Vue.component(HasError.name, HasError)
 // Vue.component(AlertError.name, AlertError)
 
@@ -32,6 +35,20 @@ const router = new VueRouter({
     mode: 'history',
     routes // short for `routes: routes`
   })
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
+
+window.Toast = Toast;
 
   const options = {
     color: '#bffaf3',
